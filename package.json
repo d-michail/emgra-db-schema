@@ -1,0 +1,16 @@
+{
+  "name": "emgra-db-schema",
+  "version": "0.1.0",
+  "scripts": {
+    "migrate:create": "node-pg-migrate create -j ts --tsconfig tsconfig.json --migrations-dir migrations",
+    "migrate": "node-pg-migrate -j ts --tsconfig tsconfig.json",
+    "roles": "node-pg-migrate -j ts --tsconfig tsconfig.json --migrations-dir roles"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "node-pg-migrate": "^7.9.1",
+    "ts-node": "^10.9.2"
+  }
+}
