@@ -1,5 +1,5 @@
 import { ColumnDefinitions, MigrationBuilder } from 'node-pg-migrate';
-import { HDAB_SCHEMA, ADMIN, DATA_HOLDER, DATA_SPECIALIST, ROLES, SCHEMA_ROLE_GRANTS, SCHEMA_TABLE_ROLE_GRANTS } from '../init/schema';
+import { EMGRA_SCHEMA, ADMIN, MANAGER, ORGANIZATION_MANAGER, ORGANIZATION_USER, ROLES, SCHEMA_ROLE_GRANTS, SCHEMA_TABLE_ROLE_GRANTS } from '../init/schema';
 
 export const shorthands: ColumnDefinitions | undefined = undefined;
 
@@ -44,12 +44,6 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
       GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin;
       ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO admin;
       ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO admin;
-      ALTER ROLE hdabuser SET search_path TO public, public;
-      GRANT USAGE ON SCHEMA public TO hdabuser;
-      GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO hdabuser;
-      GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO hdabuser;
-      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO hdabuser;
-      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO hdabuser;
     `);
 
 }
