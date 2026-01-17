@@ -10,18 +10,6 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
   const current_role = (await pgm.db.query(`SELECT current_role`)).rows[0].current_role;
   const current_schema = (await pgm.db.query(`SELECT current_schema`)).rows[0].current_schema;
 
-  const authenticatorPassword = process.env.AUTHENTICATOR_ROLE_PASS;
-  if (!authenticatorPassword) {
-    throw new Error("AUTHENTICATOR_ROLE_PASS env var is required");
-  }
-
-  pgm.createRole(ROLE_WEB_ANON, { login: false });
-  pgm.createRole(ROLE_AUTHENTICATOR, {
-    login: true,
-    password: authenticatorPassword,
-  });
-  pgm.grantRoles([ROLE_WEB_ANON], ROLE_AUTHENTICATOR);
-
   //Grant privileges
   Object.entries(SCHEMA_ROLE_GRANTS).forEach(([schema, roles]) => {
     Object.entries(roles).forEach(([role, privileges]) => {
@@ -50,6 +38,5 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 }
 
 export async function down(pgm: MigrationBuilder): Promise<void> {
-  pgm.dropRole(ROLE_AUTHENTICATOR);
-  pgm.dropRole(ROLE_WEB_ANON);
+  
 }

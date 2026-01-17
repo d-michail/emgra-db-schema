@@ -50,13 +50,18 @@ export const SCHEMA_ROLE_GRANTS: Record<SCHEMA, Partial<Record<ROLE, SchemaPrivi
 type RoleTablePrivileges = Record<string, TablePrivilege | TablePrivilege[] | 'ALL'>
 export const SCHEMA_TABLE_ROLE_GRANTS: Partial<Record<SCHEMA, Partial<Record<ROLE,  RoleTablePrivileges>>>> = {
     api: {
+        web_anon: { 
+            organizations: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+            organization_app_users: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+            app_users: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+        },
         authenticator: {
             organizations: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+            organization_app_users: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
+            app_users: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
         },
     },
 }
-
-
 
 
 
